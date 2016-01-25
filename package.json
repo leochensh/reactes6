@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify --debug index.js > bundle.js",
+    "build-dist": "browserify index.js | uglifyjs -m > bundle.min.js",
+    "watch": "watchify --debug index.js -o bundle.js",
+    "build-min": "browserify index.js > bundle.js",
+    "ugly": "uglifyjs bundle.js > bundle.min.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +21,19 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "nodemon": "^1.8.1",
+    "uglifyjs": "^2.4.10",
     "watchify": "^3.7.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "stage": [
+            0
+          ]
+        }
+      ]
+    ]
   }
 }
